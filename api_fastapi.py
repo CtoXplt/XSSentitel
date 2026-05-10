@@ -159,9 +159,7 @@ def index():
             "POST /predict": "Prediksi payload XSS",
             "GET /metrics": "Metrik performa & Statistik Ril-time",
             "GET /logs": "Riwayat prediksi terbaru",
-            "GET /info": "Informasi dataset",
-            "GET /cache-stats": "Cache statistics",
-            "POST /cache-clear": "Bersihkan cache embedding BERT"
+            "GET /info": "Informasi dataset"
         },
     })
 
@@ -256,26 +254,6 @@ def metrics():
     )
     return JSONResponse(response)
 
-@app.get("/cache-stats")
-def cache_stats():
-    total = LIVE_STATS["cache_hits"] + LIVE_STATS["cache_misses"]
-    return JSONResponse({
-        "cache_size": len(EMBEDDING_CACHE),
-        "max_cache_size": MAX_CACHE_SIZE,
-        "cache_hits": LIVE_STATS["cache_hits"],
-        "cache_misses": LIVE_STATS["cache_misses"],
-        "hit_rate": round(
-            LIVE_STATS["cache_hits"] / max(1, total) * 100, 2
-        ) if total > 0 else 0,
-        "total_requests": LIVE_STATS["total_requests"],
-    })
-
-@app.post("/cache-clear")
-def cache_clear():
-    EMBEDDING_CACHE.clear()
-    LIVE_STATS["cache_hits"] = 0
-    LIVE_STATS["cache_misses"] = 0
-    return JSONResponse({"message": "Embedding cache cleared", "cache_size": len(EMBEDDING_CACHE)})
 
 @app.get("/logs")
 def get_logs():
