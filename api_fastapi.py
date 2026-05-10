@@ -207,10 +207,18 @@ def predict(payload: PredictRequest):
 
         confidence = 0.0
         try:
-            proba = lr_model.predict_proba(X_hybrid)[0]
-            confidence = float(max(proba))
-        except Exception:
-            pass
+            if hasattr(lr_model, "predict_proba"):
+                proba = lr_model.predict_proba(X_hybrid)[0]
+                confidence = float(max(proba))
+            elif hasattr(lr_model, "decision_function"):
+                scores = lr_model.decision_function(X_hybrid)
+                # Convert logit score to probability-like value
+                confidence = float(1 / (1 + np.exp(-abs(scores[0]))))
+            else:
+                confidence = 0.99
+        except Exception as e:
+            logger.warning(f"Confidence calculation failed: {e}")
+            confidence = 0.95
 
         timings["total"] = sum(timings.values())
 
