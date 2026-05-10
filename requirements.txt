@@ -11,3 +11,4 @@ pandas
 flask
 flask-cors
 python-multipart
+scikit-learn
