@@ -23,9 +23,7 @@ pip-delete-this-directory.txt
 .cache/
 
 # Project Specific
-XSS_dataset.csv
 api.py
 load_test.py
 load_test_optimized.py
-train_hybrid.py
 PERFORMANCE_REPORT.md
