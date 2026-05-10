@@ -38,8 +38,25 @@ Project Skripsi: Deteksi serangan **Cross-Site Scripting (XSS)** menggunakan pen
    python app.py
    ```
 
-## 📊 Performance
-Detail performa model dapat dilihat pada file `metrics.json` dan `PERFORMANCE_REPORT.md`.
+## 📊 Model Evaluation
+Bagian ini menunjukkan hasil analisis performa model Hybrid BERT + TF-IDF yang dikembangkan.
+
+### 📈 Performance Visualizations
+| Confusion Matrix | ROC Curve |
+| :---: | :---: |
+| ![Confusion Matrix](evaluation_results/confusion_matrix.png) | ![ROC Curve](evaluation_results/roc_curve.png) |
+
+| Classification Report | Metrics Bar Chart |
+| :---: | :---: |
+| ![Classification Report](evaluation_results/classification_report.png) | ![Metrics Bar Chart](evaluation_results/metrics_bar_chart.png) |
+
+### 🔍 Comparison & Distribution
+| ROC Comparison | Configuration Comparison |
+| :---: | :---: |
+| ![ROC Curve Comparison](evaluation_results/roc_curve_comparison.png) | ![Comparison Configurations](evaluation_results/comparison_configurations.png) |
+
+> **Note:** Dataset memiliki distribusi kelas yang seimbang seperti yang ditunjukkan pada plot distribusi kelas.
+> ![Class Distribution](evaluation_results/class_distribution.png)
 
 ## 📝 Dataset
 Dataset yang digunakan berisi payload XSS dan benign string yang telah dipreproses.

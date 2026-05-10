@@ -29,4 +29,3 @@ load_test.py
 load_test_optimized.py
 train_hybrid.py
 PERFORMANCE_REPORT.md
-evaluation_results/
