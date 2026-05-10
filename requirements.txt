@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+joblib
+torch
+numpy
+scipy
+transformers
+gradio
+huggingface-hub
+pandas
+flask
+flask-cors
+python-multipart
