@@ -1,11 +1,9 @@
 ---
-title: XSSentitel
+title: XSSentitel API
 emoji: 🛡️
 colorFrom: red
 colorTo: blue
-sdk: gradio
-sdk_version: 4.21.0
-app_file: app.py
+sdk: docker
 pinned: false
 license: mit
 ---

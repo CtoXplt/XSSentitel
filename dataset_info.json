@@ -1,0 +1,22 @@
+{
+    "total_samples": 13685,
+    "classes": {
+        "0": "Benign",
+        "1": "XSS"
+    },
+    "class_distribution": {
+        "Benign": 6312,
+        "XSS": 7373
+    },
+    "features": [
+        "TF-IDF (5000 features, char_wb n-gram 1-3)",
+        "BERT Embeddings (768 features, CLS token, bert-base-uncased)"
+    ],
+    "source": "XSS_dataset.csv",
+    "split": "80% train / 20% test (stratified)",
+    "preprocessing": [
+        "URL decoding",
+        "HTML entity decoding",
+        "whitespace normalization"
+    ]
+}

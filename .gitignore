@@ -1,12 +1,32 @@
-.venv/
+# Python junk
 __pycache__/
 *.pyc
-.vite/
+*.pyo
+*.pyd
+.Python
+env/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.toast
+.build
+.DS_Store
+
+# IDEs
 .vscode/
-*.pkl
-metrics.json
-dataset_info.json
-evaluation_results/
-PERFORMANCE_REPORT.md
+.idea/
+.vite/
+
+# Git & CLI
+.git/
+.hf-cli/
+.cache/
+
+# Project Specific
 XSS_dataset.csv
-.env
+api.py
+load_test.py
+load_test_optimized.py
+train_hybrid.py
+PERFORMANCE_REPORT.md
+evaluation_results/
