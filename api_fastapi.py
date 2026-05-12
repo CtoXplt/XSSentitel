@@ -6,6 +6,7 @@ import os
 import queue
 import time
 import urllib.parse
+import warnings
 from datetime import datetime
 import logging
 
@@ -208,7 +209,12 @@ def predict(payload: PredictRequest):
         confidence = 0.0
         try:
             if hasattr(lr_model, "predict_proba"):
-                proba = lr_model.predict_proba(X_hybrid)[0]
+                # Suppress FutureWarning dari scikit-learn versi baru
+                # soal attribute 'multi_class' yang deprecated di model lama
+                with warnings.catch_warnings():
+                    warnings.filterwarnings("ignore", category=FutureWarning)
+                    warnings.filterwarnings("ignore", message=".*multi_class.*")
+                    proba = lr_model.predict_proba(X_hybrid)[0]
                 confidence = float(max(proba))
             elif hasattr(lr_model, "decision_function"):
                 scores = lr_model.decision_function(X_hybrid)
@@ -216,6 +222,13 @@ def predict(payload: PredictRequest):
                 confidence = float(1 / (1 + np.exp(-abs(scores[0]))))
             else:
                 confidence = 0.99
+        except AttributeError:
+            # Fallback jika model pkl tidak kompatibel dengan sklearn versi baru
+            try:
+                scores = lr_model.decision_function(X_hybrid)
+                confidence = float(1 / (1 + np.exp(-abs(scores[0]))))
+            except Exception:
+                confidence = 0.95
         except Exception as e:
             logger.warning(f"Confidence calculation failed: {e}")
             confidence = 0.95
